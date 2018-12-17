@@ -8,6 +8,7 @@
     import marked from 'marked';
 //    import hljs from 'highlightjs/highlight.pack.js';
     import pinyinUtil from '../util/pinyin/pinyinUtil';
+    import markdown from '../markdown/index'
 
     export default {
         props: {
@@ -43,6 +44,7 @@
                     },
                     renderer: renderer
                 });
+                // this.html = markdown.render(this.content).html
             }
         },
         mounted () {

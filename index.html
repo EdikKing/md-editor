@@ -18,7 +18,7 @@
 <body>
 <div id="app">
     <div class="app">
-        <i-editor paste v-model="content" affix :highlight="highlight" :config="config" :before-upload="beforeUpload" :img-url="imgUrl" :autosize="{minRows: 6}"></i-editor>
+        <i-editor paste v-model="content" affix :highlight="highlight" :config="config" :before-upload="beforeUpload" :img-url="imgUrl" :autosize="{minRows: 6}" :paste="true"></i-editor>
     </div>
 </div>
     <script type="text/javascript" src="https://unpkg.com/vue@2.5.16/dist/vue.min.js"></script>
@@ -34,7 +34,8 @@
                         token: '',
                         key: ''
                     },
-                    action: 'https://up.qbox.me',
+                    // action: 'https://up.qbox.me',
+                    action: 'https://upload-z2.qiniup.com',
                     maxSize: 5120
                 }
             },
@@ -44,8 +45,8 @@
                     const p = new Promise((resolve, reject) => {
                         setTimeout(() => {
                             this.config.uploadForm = {
-                                token: '',  // 从自己服务获取的 token，用于七牛上传
-                                key: ''  // 从自己服务获取的 key，用于七牛上传
+                                token: 'M1CDrnm9ZVHgejmaMSGz8FM-mfTaJeFKgv--8CBZ:5FogE88vkfEh73GmFNs8_2Uj714=:eyJzY29wZSI6InRiZmlsZSIsImRlYWRsaW5lIjoxNTMzMDQ3Mjc3fQ==',  // 从自己服务获取的 token，用于七牛上传
+                                key: new Date().getTime()  // 从自己服务获取的 key，用于七牛上传
                             };
                             resolve();
                         }, 1000);
@@ -54,7 +55,7 @@
                 },
                 imgUrl (res) {
                     // 上传成功后，如果是七牛等服务，需要自己构造完整的图片 url
-                    return 'https://dev-file.iviewui.com/' + res.key + '/large';
+                    return 'http://tbfile.edik.cn//' + res.key;
                 },
                 highlight (code) {
                     console.log(code);

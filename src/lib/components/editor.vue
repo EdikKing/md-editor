@@ -24,37 +24,11 @@
         </div>
       </div>
     </Affix>
-    <div class="i-editor-tabs" v-else>
-      <Tabs v-model="tabType" :animated="false" @on-click="handleChangeTab">
-        <TabPane :label="writeName" name="write"></TabPane>
-        <TabPane label="预览" name="preview"></TabPane>
-        <TabPane label="写摘要" name="summary" v-if="showSummary"></TabPane>
-        <div class="i-editor-upload" slot="extra">
-          <Upload :config="config" :before-upload="beforeUpload" :styles="1" @on-success="handleUploadSuccess"></Upload>
-          <Upload :config="config" :styles="6" @on-success="handleImportMd"></Upload>
-          <Button type="text" size="small" class="i-editor-upload-item" @click="showDiff = true">
-            <Tooltip content="全屏编辑" transfer>
-              <Icon type="md-expand"></Icon>
-            </Tooltip>
-          </Button>
-          <Button type="text" size="small" class="i-editor-upload-item" @click="showMdTip = true">
-            <Tooltip content="Markdown 语法提示" transfer>
-              <Icon type="logo-markdown"></Icon>
-            </Tooltip>
-          </Button>
-        </div>
-      </Tabs>
-    </div>
+
     <div class="i-editor-md">
       <div class="i-editor-wrapper" v-show="tabType === 'write'" v-if="!showDiff">
         <Upload :paste="paste" :config="config" :before-upload="beforeUpload" type="drag" :styles="3" @on-success="handleUploadSuccess" @click.prevent.stop.native>
-          <Input
-                  v-model="content"
-                  :placeholder="placeholder"
-                  type="textarea"
-                  :autosize="autosize"
-                  ref="content"
-          />
+          <Input v-model="content" :placeholder="placeholder" type="textarea" :autosize="autosize" ref="content"/>
         </Upload>
       </div>
       <div class="i-editor-wrapper" v-if="tabType === 'preview'">
@@ -141,13 +115,8 @@
             <i-col span="12">
               <Upload :paste="paste" :config="config" :before-upload="beforeUpload" v-if="showDiffEditor" type="drag" :styles="3" @on-success="handleUploadSuccess"
                       @click.prevent.stop.native>
-                <Input
-                        v-model="content"
-                        :placeholder="placeholder"
-                        type="textarea"
-                        :autosize="autosize"
-                        ref="content"
-                />
+                <!--<Input v-model="content" :placeholder="placeholder" type="textarea" :autosize="autosize" ref="content"/>-->
+                <textarea ref="content" v-model="content" autocomplete="off" spellcheck="false" placeholder="" rows="2" class="ivu-input" style="min-height: calc(100vh - 50px);"></textarea>
               </Upload>
             </i-col>
             <i-col span="12">
